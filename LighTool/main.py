@@ -24,7 +24,7 @@ class Lomus(QtWidgets.QWidget):
 
 	def lightCreator(self):
 		self.light_node = sceneRoot.createNode('light')
-		self.geo_node = sceneRoot.node('/obj/donut')
+		self.geo_node = sceneRoot.node('/obj/jhgjgh')
 		self.light_node.parm('lookat').set(self.geo_node.path())
 
 
