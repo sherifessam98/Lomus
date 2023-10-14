@@ -10,11 +10,14 @@ class Lomus(QtWidgets.QWidget):
 		self.ui = QtUiTools.QUiLoader().load(ui_file)
 		self.setParent(hou.ui.mainQtWindow(), QtCore.Qt.Window)
 		self.counter = 0
+		self.count = 0
 		self.currentGraph()
-		self.click_count = 0
-		# Donot use () for calling a function in a click event!!!
-		self.ui.lightCreate.clicked.connect(self.lightCreator)
-
+		self.geoNode = self.traverseSG("geo")
+		self.lighChecker()
+		self.cameraChecker()
+		# USE () for calling a function in a click event!!!
+		self.ui.resolutionCombo.currentIndexChanged.connect(self.adjustResolution())
+		self.show()
 
 	def currentGraph(self):
 		# This function gets the node graph and check for the geo imported
@@ -22,42 +25,75 @@ class Lomus(QtWidgets.QWidget):
 
 		# Get the active pane tab
 		self.activePane = hou.ui.curDesktop().paneTabOfType(hou.paneTabType.NetworkEditor)
-
 		if self.activePane:
 			# Get the active node graph
 			self.nodeGraph = self.activePane.pwd()
-
-			if self.nodeGraph:
+			if not self.nodeGraph:
 				# Iterate through all nodes in the active node graph
-				for node in self.nodeGraph.allSubChildren():
-					if node.type().name() == "geo":
-						self.geoNode = node
-						print("Geometry found", self.geoNode)
-
-					else:
-						break
-			else:
 				print("No active node graph found.")
 		else:
 			print("No active pane tab found.")
 
+	def traverseSG(self, targetNodeName):
+		#This function traverses the scene graph
+		#searching for a node type
+		self.goal = targetNodeName
+		self.target = None
+		for node in self.nodeGraph.allSubChildren():
+			if node.type().name() == self.goal:
+				self.target = node
+				break
+		return self.target
+
 	def show(self):
+		#show the UI
 		self.ui.show()
 
+	def cameraChecker(self):
+		self.cameraCreated = self.traverseSG("cam")
+		if self.cameraCreated:
+			hou.ui.displayMessage("camera already crated in the scene", title="Error", severity=hou.severityType.Error)
+		else:
+			# Donot use () for calling a function in a click event!!!
+			self.ui.cameraCreateButton.clicked.connect(self.cameraCreator)
+
+	def cameraCreator(self):
+		if self.count < 1:
+			self.cameraNode = self.nodeGraph.createNode('cam')
+			self.cameraNode.setInput(0, self.geoNode)
+			self.count += 1
+		else:
+			hou.ui.displayMessage("Already a camera has been created", title="Error", severity=hou.severityType.Error)
+
+	def lighChecker(self):
+		# generalize this code to make it more dynamic
+		self.lightCreated = self.traverseSG("hlight::2.0")
+		if self.lightCreated:
+			hou.ui.displayMessage("light already crated in the scene", title="Error", severity=hou.severityType.Error)
+		else:
+			# Donot use () for calling a function in a click event!!!
+			self.ui.lightCreateButton.clicked.connect(self.lightCreator)
+
 	def lightCreator(self):
+
 		self.x = random.randint(-2.0, 2.0)
 		self.y = random.randint(-2.0, 2.0)
 		self.z = random.randint(-2.0, 2.0)
 		self.random_intensity = random.randint(3.0, 10.0)
 		if self.counter < 4:
-				self.light_node = self.nodeGraph.createNode('hlight')
-				self.light_node.parmTuple('t').set((self.x, self.y, self.z))
-				self.light_node.parm('light_intensity').set(self.random_intensity)
-				self.light_node.setInput(0, self.geoNode)
-				self.counter += 1
-
+			self.light_node = self.nodeGraph.createNode('hlight')
+			self.light_node.parmTuple('t').set((self.x, self.y, self.z))
+			self.light_node.parm('light_intensity').set(self.random_intensity)
+			self.light_node.setInput(0, self.geoNode)
+			self.counter += 1
 		else:
-				hou.ui.displayMessage("Already 4 lights has been created", title="Error", severity=hou.severityType.Error)
+			hou.ui.displayMessage("Already 4 lights has been created", title="Error", severity=hou.severityType.Error)
+
+	def adjustResolution(self):
+		#This function aims to adjust the camera resolution
+		self.resolutionList = ["640x480", "1280x720", "1920x1080", "3840x2160"]
+		self.ui.resolutionCombo.addItems(self.resolutionList)
+
 
 
 win = Lomus()
