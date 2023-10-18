@@ -11,12 +11,14 @@ class Lomus(QtWidgets.QWidget):
 		self.setParent(hou.ui.mainQtWindow(), QtCore.Qt.Window)
 		self.counter = 0
 		self.count = 0
+		self.cameraNode = ""
 		self.currentGraph()
 		self.geoNode = self.traverseSG("geo")
 		self.lighChecker()
 		self.cameraChecker()
+		self.isEmpty = True
 		# USE () for calling a function in a click event!!!
-		self.ui.resolutionCombo.currentIndexChanged.connect(self.adjustResolution())
+		self.ui.resolutionCombo.currentIndexChanged.connect(self.adjustResolution)
 		self.show()
 
 	def currentGraph(self):
@@ -35,8 +37,8 @@ class Lomus(QtWidgets.QWidget):
 			print("No active pane tab found.")
 
 	def traverseSG(self, targetNodeName):
-		#This function traverses the scene graph
-		#searching for a node type
+		# This function traverses the scene graph
+		# searching for a node type
 		self.goal = targetNodeName
 		self.target = None
 		for node in self.nodeGraph.allSubChildren():
@@ -46,7 +48,8 @@ class Lomus(QtWidgets.QWidget):
 		return self.target
 
 	def show(self):
-		#show the UI
+		# show the UI
+		self.adjustResolution()
 		self.ui.show()
 
 	def cameraChecker(self):
@@ -90,10 +93,17 @@ class Lomus(QtWidgets.QWidget):
 			hou.ui.displayMessage("Already 4 lights has been created", title="Error", severity=hou.severityType.Error)
 
 	def adjustResolution(self):
-		#This function aims to adjust the camera resolution
+		# This function aims to adjust the camera resolution
 		self.resolutionList = ["640x480", "1280x720", "1920x1080", "3840x2160"]
-		self.ui.resolutionCombo.addItems(self.resolutionList)
-
+		if self.isEmpty:
+			self.ui.resolutionCombo.addItems(self.resolutionList)
+			self.isEmpty = False
+		else:
+			self.currentText = self.ui.resolutionCombo.currentText()
+			res1, res2 = self.currentText.split('x') if 'x' in self.currentText else (self.currentText, "")
+			if self.cameraNode:
+				self.cameraNode.parmTuple("res")[0].set(res1)
+				self.cameraNode.parmTuple("res")[1].set(res2)
 
 
 win = Lomus()
