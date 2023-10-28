@@ -6,7 +6,7 @@ import random
 class Lomus(QtWidgets.QWidget):
 	def __init__(self):
 		super(Lomus, self).__init__()
-		ui_file = '/Users/sherifessam/Desktop/HoudiniLightingTool/Lomus.ui'
+		ui_file = 'D:\Work\HoudiniLightingTool\Lomus.ui'
 		self.ui = QtUiTools.QUiLoader().load(ui_file)
 		self.setParent(hou.ui.mainQtWindow(), QtCore.Qt.Window)
 		self.counter = 0
@@ -16,6 +16,7 @@ class Lomus(QtWidgets.QWidget):
 		self.geoNode = self.traverseSG("geo")
 		self.lighChecker()
 		self.cameraChecker()
+		self.ui.renderCreateButton.clicked.connect(self.createRenderCamera)
 		self.isEmpty = True
 		# USE () for calling a function in a click event!!!
 		self.ui.resolutionCombo.currentIndexChanged.connect(self.adjustResolution)
@@ -52,9 +53,22 @@ class Lomus(QtWidgets.QWidget):
 		self.adjustResolution()
 		self.ui.show()
 
+	def createRenderCamera(self):
+		self.IsropnetCreated = self.traverseSG("ropnet")
+		if self.IsropnetCreated:
+			hou.ui.displayMessage("Already a ROP network has already been created", title="Error", severity=hou.severityType.Error)
+		else:
+			self.ropnetNode =self.nodeGraph.createNode('ropnet')
+			self.isrenderNodeCreated = self.traverseSG("ifd")
+			if self.isrenderNodeCreated:
+				hou.ui.displayMessage("Already a Render node has already been created", title="Error", severity=hou.severityType.Error)
+			else:
+				self.renderNode = self.ropnetNode.createNode('ifd')
+
+
 	def cameraChecker(self):
-		self.cameraCreated = self.traverseSG("cam")
-		if self.cameraCreated:
+		self.IscameraCreated = self.traverseSG("cam")
+		if self.IscameraCreated:
 			hou.ui.displayMessage("camera already crated in the scene", title="Error", severity=hou.severityType.Error)
 		else:
 			# Donot use () for calling a function in a click event!!!
@@ -64,21 +78,22 @@ class Lomus(QtWidgets.QWidget):
 		if self.count < 1:
 			self.cameraNode = self.nodeGraph.createNode('cam')
 			self.cameraNode.setInput(0, self.geoNode)
+			# self.cameraConstraint = self.cameraNode.createOutputNode("lookat")
 			self.count += 1
 		else:
 			hou.ui.displayMessage("Already a camera has been created", title="Error", severity=hou.severityType.Error)
 
 	def lighChecker(self):
 		# generalize this code to make it more dynamic
-		self.lightCreated = self.traverseSG("hlight::2.0")
-		if self.lightCreated:
+		self.IslightCreated = self.traverseSG("hlight::2.0")
+		if self.IslightCreated:
 			hou.ui.displayMessage("light already crated in the scene", title="Error", severity=hou.severityType.Error)
 		else:
 			# Donot use () for calling a function in a click event!!!
 			self.ui.lightCreateButton.clicked.connect(self.lightCreator)
 
 	def lightCreator(self):
-
+		# This function create a light node in the scene
 		self.x = random.randint(-2.0, 2.0)
 		self.y = random.randint(-2.0, 2.0)
 		self.z = random.randint(-2.0, 2.0)
@@ -104,6 +119,9 @@ class Lomus(QtWidgets.QWidget):
 			if self.cameraNode:
 				self.cameraNode.parmTuple("res")[0].set(res1)
 				self.cameraNode.parmTuple("res")[1].set(res2)
+	def chooseAOV(self):
+			self.ui.ch_check.stateChanged.connect(self.state_changed)
+
 
 
 win = Lomus()

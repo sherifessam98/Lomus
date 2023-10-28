@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>653</width>
-    <height>493</height>
+    <height>478</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>130</y>
+      <x>30</x>
+      <y>100</y>
       <width>160</width>
-      <height>80</height>
+      <height>31</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -36,10 +36,10 @@
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>130</y>
+      <x>30</x>
+      <y>50</y>
       <width>160</width>
-      <height>80</height>
+      <height>41</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -55,8 +55,8 @@
    <widget class="QWidget" name="verticalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>250</y>
+      <x>160</x>
+      <y>190</y>
       <width>121</width>
       <height>80</height>
      </rect>
@@ -70,8 +70,8 @@
    <widget class="QWidget" name="verticalLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>250</y>
+      <x>30</x>
+      <y>190</y>
       <width>121</width>
       <height>80</height>
      </rect>
@@ -86,6 +86,133 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>315</x>
+      <y>20</y>
+      <width>81</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Choose AOV:</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>30</y>
+      <width>196</width>
+      <height>391</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <item>
+      <widget class="QCheckBox" name="shadingPosition">
+       <property name="text">
+        <string>Shading Position (P)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="shadingDepth">
+       <property name="text">
+        <string>Shading Depth (PZ)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="shadingNormal">
+       <property name="text">
+        <string>Shading Normal (N)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="combinedLighting">
+       <property name="text">
+        <string>Combined Lighting (per-component)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="directLighting">
+       <property name="text">
+        <string>Direct Lighting (per-component)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="indirectLighting">
+       <property name="text">
+        <string>Indirect Lighting (per-component)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="combinedEmission">
+       <property name="text">
+        <string>Combined Emisson</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="directUnshadowed">
+       <property name="text">
+        <string>Direct Unshadowed</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="directRay">
+       <property name="text">
+        <string>Direct Ray Samples</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="indirectRay">
+       <property name="text">
+        <string>Indirect Ray Samples</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="sssSingleMulti">
+       <property name="text">
+        <string>SSS Single/Multi</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_7">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>160</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <item>
+      <widget class="QPushButton" name="renderCreateButton">
+       <property name="text">
+        <string>Create Render Node</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -93,7 +220,7 @@
      <x>0</x>
      <y>0</y>
      <width>653</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
