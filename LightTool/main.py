@@ -80,7 +80,7 @@ class Lomus(QtWidgets.QWidget):
         def cameraChecker(self):
                 self.IscameraCreated = self.traverseSG("cam")
                 if self.IscameraCreated:
-                        hou.ui.displayMessage("camera already crated in the scene", title="Error", severity=hou.severityType.Error)
+                        hou.ui.displayMessage("camera already created in the scene", title="Error", severity=hou.severityType.Error)
                 else:
                         # Donot use () for calling a function in a click event!!!
                         self.ui.cameraCreateButton.clicked.connect(self.cameraCreator)
