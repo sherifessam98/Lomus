@@ -116,77 +116,77 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_6">
      <item>
-      <widget class="QCheckBox" name="shadingPosition">
+      <widget class="QCheckBox" name="vm_quickplane_P">
        <property name="text">
         <string>Shading Position (P)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="shadingDepth">
+      <widget class="QCheckBox" name="vm_quickplane_Pz">
        <property name="text">
         <string>Shading Depth (PZ)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="shadingNormal">
+      <widget class="QCheckBox" name="vm_quickplane_N">
        <property name="text">
         <string>Shading Normal (N)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="combinedLighting">
+      <widget class="QCheckBox" name="vm_quickplane_all_comp">
        <property name="text">
         <string>Combined Lighting (per-component)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="directLighting">
+      <widget class="QCheckBox" name="vm_quickplane_direct_comp">
        <property name="text">
         <string>Direct Lighting (per-component)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="indirectLighting">
+      <widget class="QCheckBox" name="vm_quickplane_indirect_comp">
        <property name="text">
         <string>Indirect Lighting (per-component)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="combinedEmission">
+      <widget class="QCheckBox" name="vm_quickplane_all_emission">
        <property name="text">
         <string>Combined Emisson</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="directUnshadowed">
+      <widget class="QCheckBox" name="vm_quickplane_direct_noshadow">
        <property name="text">
         <string>Direct Unshadowed</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="directRay">
+      <widget class="QCheckBox" name="vm_quickplane_direct_samples">
        <property name="text">
         <string>Direct Ray Samples</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="indirectRay">
+      <widget class="QCheckBox" name="vm_quickplane_indirect_samples">
        <property name="text">
         <string>Indirect Ray Samples</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="sssSingleMulti">
+      <widget class="QCheckBox" name="vm_quickplane_sss">
        <property name="text">
         <string>SSS Single/Multi</string>
        </property>
