@@ -136,7 +136,7 @@ class Lomus(QtWidgets.QWidget):
                 self.isrenderNodeCreated = self.traverseSG("ifd")
                 if not self.isrenderNodeCreated:
                         hou.ui.displayMessage("Please Create a render camera node first", title="Error", severity=hou.severityType.Error)
-                        self.ui.sendingChecBox.setChecked(False)
+                        self.sender().setChecked(False)
                 elif self.isrenderNodeCreated and self.sender().isChecked():
                         hou.node('/obj/ropnet1/mantra1/').parm(sendingChecBox).set(1)
 
