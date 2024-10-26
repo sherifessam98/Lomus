@@ -6,7 +6,7 @@ import random
 class Lomus(QtWidgets.QWidget):
         def __init__(self):
                 super(Lomus, self).__init__()
-                ui_file = 'D:\Work\HoudiniLightingTool\Lomus.ui'
+                ui_file = 'S:\Houdini work\HoudiniLightingTool/Lomus.ui'
                 self.ui = QtUiTools.QUiLoader().load(ui_file)
                 self.setParent(hou.ui.mainQtWindow(), QtCore.Qt.Window)
                 self.counter = 0
